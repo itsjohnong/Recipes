@@ -1,6 +1,15 @@
+/* body {
+  background-color: #fffbf0 !important;
+} */
+
 .carousel {
   width:600px;
   height:auto;
+}
+
+.navbar-brand {
+  color: rgb(231, 159, 26) !important;
+  font-weight: 600;
 }
 
 .carousel-inner img {
@@ -39,6 +48,12 @@ img {
   margin-top: 4rem;
   border: 1px solid black;
   border-radius: .5rem;
+  background-color: #fffbf0 !important;
+  padding: 2rem;
+}
+
+.recipe-finder h3 {
+  border-bottom: 1px solid black;
 }
 
 .recipe-group {
@@ -50,6 +65,7 @@ img {
   /* position: fixed !important; */
   margin-top: 4rem;
   width: 450px;
+  background-color: #fffbf0 !important;
 }
 
 .left-recipe {
@@ -61,4 +77,18 @@ img {
 .grocery-list {
   display: flex;
   justify-content: center;
+}
+
+.grocery-list .card {
+  display: flex;
+  padding: 4rem;
+  background-color: #fffbf0 !important;
+}
+
+.grocery-title {
+  border-bottom: 1px solid black;
+}
+
+.card-body {
+  background-color: #fffbf0;
 }
