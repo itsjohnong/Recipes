@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+import Navbar from './components/Navbar';
+import RecipeFinder from './components/RecipeFinder';
+import DiscoverFeed from './components/DiscoverFeed';
+import RecipeFeed from './components/RecipeFeed';
+import Grocery from './components/Grocery';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
+  const [recipes, setRecipes] = useState([]);
+  const [grocery, setGrocery] = useState([]);
+
+  useEffect(() => {
+    axios.get('/recipes')
+      .then((res) => {
+        console.log(res)
+        setRecipes(res.data);
+      })
+      .catch((err) => { console.log(err); })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        {console.log(recipes)}
+        {console.log('state', grocery)}
+        {/* <Route path="/" element={<Navbar />} /> */}
+        <Navbar />
+        {/* <DiscoverFeed recipes={recipes} setGrocery={setGrocery} grocery={grocery} /> */}
+        <div className="recipe-group">
+          <RecipeFinder recipes={recipes} />
+          <RecipeFeed recipes={recipes} setGrocery={setGrocery} grocery={grocery} />
+          {/* <Route path="/" element={<RecipeFinder recipes={recipes} />} />
+          <Route path="/" element={<RecipeFeed recipes={recipes} setGrocery={setGrocery} grocery={grocery} />} /> */}
+        </div>
+      <Routes>
+        <Route path="/grocery" element={<Grocery />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
