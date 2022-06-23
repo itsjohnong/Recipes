@@ -6,6 +6,7 @@ import RecipeFinder from './components/RecipeFinder';
 import DiscoverFeed from './components/DiscoverFeed';
 import RecipeFeed from './components/RecipeFeed';
 import Grocery from './components/Grocery';
+import RecipeHeader from './components/RecipeHeader';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -26,18 +27,30 @@ function App() {
     <BrowserRouter>
         {console.log(recipes)}
         {console.log('state', grocery)}
-        {/* <Route path="/" element={<Navbar />} /> */}
-        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Navbar />} />
+        </Routes>
+        {/* <Navbar /> */}
         {/* <DiscoverFeed recipes={recipes} setGrocery={setGrocery} grocery={grocery} /> */}
         <div className="recipe-group">
-          <RecipeFinder recipes={recipes} />
-          <RecipeFeed recipes={recipes} setGrocery={setGrocery} grocery={grocery} />
-          {/* <Route path="/" element={<RecipeFinder recipes={recipes} />} />
-          <Route path="/" element={<RecipeFeed recipes={recipes} setGrocery={setGrocery} grocery={grocery} />} /> */}
+          <div className="left-recipe">
+            <Routes>
+              <Route exact path="/" element={<RecipeHeader />} />
+            </Routes>
+            <Routes>
+              <Route exact path="/" element={<RecipeFinder recipes={recipes} />} />
+            </Routes>
+              {/* <RecipeHeader />
+              <RecipeFinder recipes={recipes} /> */}
+          </div>
+          <Routes>
+            {/* <RecipeFeed recipes={recipes} setGrocery={setGrocery} grocery={grocery} /> */}
+            <Route exact path="/" element={<RecipeFeed recipes={recipes} setGrocery={setGrocery} grocery={grocery} />} />
+          </Routes>
         </div>
-      <Routes>
-        <Route path="/grocery" element={<Grocery />} />
-      </Routes>
+        <Routes>
+          <Route exact path="/grocery" element={<Grocery grocery={grocery} />} />
+        </Routes>
     </BrowserRouter>
   );
 }
